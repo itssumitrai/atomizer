@@ -179,6 +179,7 @@ Atomizer.prototype.parseConfig = function (config/*:AtomizerConfig*/, options/*:
 
     classNames.forEach(function (className) {
         var match = XRegExp.exec(className, classNameSyntax);
+        console.log('>> className:', className, 'match:', match, 'classNameSyntax:', classNameSyntax);
         var rule;
         var ruleIndex;
         var treeo;
@@ -501,6 +502,7 @@ Atomizer.prototype.getCss = function (config/*:AtomizerConfig*/, options/*:CSSOp
                 var breakPoint;
                 var selector;
 
+                console.log('> treeo:', treeo);
                 // if we were not able to find the declaration then don't write anything
                 if (!treeo.declarations) {
                     return;

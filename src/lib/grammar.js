@@ -83,7 +83,8 @@ var GRAMMAR = {
     'PSEUDO_CLASS'  : '(?:' + flatten(PSEUDO_CLASSES).join('|') + ')(?![a-z])',
     'PSEUDO_ELEMENT': '(?:' + flatten(PSEUDO_ELEMENTS).join('|') + ')(?![a-z])',
     'PSEUDO_CLASS_SIMPLE'   : ':[a-z]+',
-    'PSEUDO_ELEMENT_SIMPLE' : '::[a-z]+'
+    'PSEUDO_ELEMENT_SIMPLE' : '::[a-z]+',
+    'CSS_VARIABLE': 'var\\(--[-a-zA-Z0-9]+\\)'
 };
 
 GRAMMAR.PARENT_SELECTOR = [
@@ -199,6 +200,10 @@ Grammar.prototype.getSyntax = function getSyntax(isSimple)/*:string*/ {
         // word boundary
         GRAMMAR.BOUNDARY,
         '(',
+        // option css variable
+        '(?<cssVariable>',
+        GRAMMAR.CSS_VARIABLE,
+        ')?',
         // optional parent
         '(?<parentSelector>',
             isSimple ? GRAMMAR.PARENT_SELECTOR_SIMPLE : GRAMMAR.PARENT_SELECTOR,
